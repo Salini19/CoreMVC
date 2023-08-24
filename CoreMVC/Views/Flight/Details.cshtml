@@ -1,0 +1,42 @@
+﻿@model CoreMVC.Models.Flight
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Flight</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Flight ID :
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FId)
+        </dd>
+        <dt class = "col-sm-2">
+            FlightName : 
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FName)
+        </dd>
+        <dt class = "col-sm-2">
+            IATA : 
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IATA)
+        </dd>
+        <dt class = "col-sm-2">
+            SeatCount : 
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SeatCount)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.FId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
