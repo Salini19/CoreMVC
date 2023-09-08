@@ -5,47 +5,42 @@ namespace CoreMVC.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly DatabaseContext db;
-        public Repository(DatabaseContext dBContext) 
+        private readonly DatabaseContext _db;
+        public Repository(DatabaseContext dbContext) 
         {
-                db = dBContext;
+                _db = dbContext;
         }
         public void Add(T entity)
         {
-            db.Set<T>().AddAsync(entity);
-            db.SaveChanges();
-            
+            _db.Set<T>().AddAsync(entity);
+            _db.SaveChanges();
+           
         }
 
         public void Delete(int id)
         {
-            
-           // List<T> tlist = db.Set<T>().ToList();
-            T table= db.Set<T>().Find(id);
-            db.Remove(table);
-            db.SaveChanges();
-           
-           
+            T table= _db.Set<T>().Find(id);
+            _db.Remove(table);
+            _db.SaveChanges();                  
         }
 
         public List<T> GetAll()
         {
-            return db.Set<T>().ToList();
+            return _db.Set<T>().ToList();
             
         }
 
         public T GetById(int id)
         {
-            return db.Set<T>().Find(id);
+            return _db.Set<T>().Find(id);
            
         }
 
         public void Update(T entity)
         {
-            // db.Set<T>().Attach(entity);
-            db.Entry(entity).State = EntityState.Modified;
-           // db.Set<T>().Entry(entity);
-            db.SaveChanges();
+            // _db.Set<T>().Attach(entity);
+            _db.Entry(entity).State = EntityState.Modified;
+            _db.SaveChanges();
         }
     }
 }

@@ -7,23 +7,23 @@ namespace CoreMVC.Controllers
 {
     public class FlightController : Controller
     {
-        private readonly IRepository<Flight> repository;
-        public FlightController(IRepository<Flight> _repository)
-        {
-            repository = _repository;
+        private readonly IRepository<Flight> _repository;
+        public FlightController(IRepository<Flight> repository)
+        {       
+            _repository = repository;
         }
         // GET: FlightController
         public IActionResult Index()
         {
-            List<Flight> flights = repository.GetAll();
+            List<Flight> flights = _repository.GetAll();
             return View(flights);
         }
 
         // GET: FlightController/Details/5
         public IActionResult Details(int id)
         {
-           Flight f= repository.GetById(id);
-            return View(f);
+           Flight flight = _repository.GetById(id);
+            return View(flight);
         }
 
         // GET: FlightController/Create
@@ -40,7 +40,7 @@ namespace CoreMVC.Controllers
         {
             try
             {
-                repository.Add(flight);
+                _repository.Add(flight);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -52,8 +52,8 @@ namespace CoreMVC.Controllers
         // GET: FlightController/Edit/5
         public IActionResult Edit(int id)
         {
-            Flight f = repository.GetById(id);
-            return View(f);
+            Flight flight = _repository.GetById(id);
+            return View(flight);
         }
 
         // POST: FlightController/Edit/5
@@ -63,7 +63,7 @@ namespace CoreMVC.Controllers
         {
             try
             {
-                repository.Update(flight);
+                _repository.Update(flight);
               
                 return RedirectToAction(nameof(Index));
             }
@@ -76,8 +76,8 @@ namespace CoreMVC.Controllers
         // GET: FlightController/Delete/5
         public IActionResult Delete(int id)
         {
-            Flight f = repository.GetById(id);
-            return View(f);
+            Flight flight =_repository.GetById(id);
+            return View(flight);
         }
 
         // POST: FlightController/Delete/5
@@ -87,7 +87,7 @@ namespace CoreMVC.Controllers
         {
             try
             {
-                repository.Delete(id);
+                _repository.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
